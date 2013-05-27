@@ -1,0 +1,93 @@
+<html>
+<head>
+	<title>Amdocs Inc</title>
+	<style type="text/css">
+	 .productData {
+	 	color : blue;
+	 }
+	#lastPara {
+		color : red;
+	}
+	li.productData {
+		color : orange;
+	}
+	p.productData span{
+		font-weight: bold;
+		text-decoration : underline;
+	}
+	</style>
+</head>
+<body>
+	<form action="">
+		<div>
+			<label for="txtId" accessKey="i"> Id :</label>
+			<input type="text" id="txtId"/>
+		</div>
+		Id : <input type="text">
+		<br>
+		First Name : <input type="text" accessKey="f">
+		<br>
+		Last Name  : <input type="text">
+		<br>
+		<input type="submit" value="Submit Data">
+	</form>
+	<p id="firstPara" class="productData">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, nisi, iure, aperiam minus pariatur cum <span>accusantium recusandae</span> optio in repellendus mollitia autem culpa cumque saepe veniam blanditiis quam quia obcaecati.
+	</p>
+	<ol>
+		<li>About Amdocs</li>
+		<li>Products</li>
+		<li class="productData">Contact Us</li>
+	</ol>
+	<div class="productData">This is a div</div>
+	<div>This is another div</div>
+	<span>This is a span</span>
+	<span class="productData">This is another span</span>
+	<h1>Products</h1>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>S.No</th>
+				<th>Product Name</th>
+				<th>Cost</th>
+				<th>Units</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan="4">Category - 1</td>
+			</tr>
+			
+			<tr>
+				<td>1</td>
+				<td>Pen</td>
+				<td>10</td>
+				<td>100</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Hen</td>
+				<td>100</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td colspan="4">Category - 2</td>
+			</tr>
+			
+			<tr>
+				<td>3</td>
+				<td>Den</td>
+				<td rowspan="2">150</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>Ken</td>
+				
+				<td>200</td>
+			</tr>
+		</tbody>
+	</table>
+<p id="lastPara">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, consequatur, error, cumque, atque itaque <span>doloremque in accusamus</span>doloremque in accusamus voluptate assumenda voluptatem obcaecati natus at nulla possimus repellendus reprehenderit soluta quos delectus?</p>
+</body>
+</html>
