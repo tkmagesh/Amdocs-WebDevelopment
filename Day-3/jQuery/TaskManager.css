@@ -17,3 +17,8 @@
 	.style2 {
 		font-style: italic;
 	}
+
+	.hint{
+		color : grey;
+		font-style: italic;
+	}

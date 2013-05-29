@@ -29,23 +29,43 @@
 		}
 
 		function loadTasksFromServer(){
+			var newTask = {taskName : 'Try Ajax'};
 			$.ajax({
 				  type : 'get',
 				  url : 'tasks.json',
 				  dataType : 'json',
-				  success : function(data){
-				    $(data).each(function(index,task){
-				         $("<li>").html(task.taskName).attr("data-task-id",task.id).addClass(task.isCompleted ? "completed" : "").appendTo("#ulTaskList");
-				    });
+				  success : function(responseData){
+				  	for(var i=0;i<responseData.length;i++){
+				  		var task = responseData[i];
+				  		$("<li>").html(task.taskName).attr("data-task-id",task.id).addClass(task.isCompleted ? "completed" : "").appendTo("#ulTaskList");
+				  	}
 				  }
 				});
 		}
 
 		$(function(){
+			
 			$("#btnAddTask").on('click',addTask);
 			$("#btnRemoveCompletedTasks").on('click',removeCompletedTasks);
 			$("#btnLoadData").on("click",loadTasksFromServer);
 			$("#ulTaskList").on('click','li',onTaskItemClick);
+			
+			var hintText = 'Enter the task';
+			$("#txtTask")
+				.val(hintText)
+				.addClass("hint")
+				.focus(function(){
+					var $this = $(this);
+					if ($this.val() === hintText){
+						$this.removeClass('hint').val('');
+					}
+				})
+				.blur(function(){
+					var $this = $(this);
+					if ($this.val() === ''){
+						$this.addClass('hint').val(hintText);
+					}	
+				});
 		});
 	})();
 	</script>
