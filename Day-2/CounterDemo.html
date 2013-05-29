@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Counter Demo</title>
+	<script>
+	(function(){
+
+		function getIncrementCounter(){
+			var counter = 0;
+			return function incrementCounter(){
+					counter++;
+					document.getElementById("divMessage").innerHTML = counter;
+			}
+		}
+		function decrementCounter(){
+			counter--;
+			document.getElementById("divMessage").innerHTML = counter;	
+		}
+		function initialize(){
+			document.getElementById("btnCount").addEventListener("click",getIncrementCounter());
+			document.getElementById("btnDecrement").addEventListener("click",decrementCounter);
+		}
+		document.addEventListener("DOMContentLoaded",initialize);
+	})();
+	</script>
+</head>
+<body>
+	<input type="button" value="Count" id="btnCount">
+	<input type="button" value="Decrement" id="btnDecrement">
+	<div id="divMessage"></div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+A List Apart blog on "Doctypes"
+Paul Irish's blog on Webkit for Developers

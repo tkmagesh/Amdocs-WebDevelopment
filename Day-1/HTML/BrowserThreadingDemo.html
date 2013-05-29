@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>UI Threading Demo</title>
+	<script>
+	(function(){
+		window.addEventListener('DOMContentLoaded',function(){
+			document.getElementById("btnStart").addEventListener('click',doSomeWork);
+		})
+		function doSomeWork(){
+			for(var i=0;i<100000;i++)
+				for(var j=0;j<1000;j++)
+					for(var k=0;k<100;k++)
+					{}
+			displayMessage("completed");
+		}
+		function displayMessage(msg){
+			document.getElementById("divMessage").innerHTML += msg + "<br/>";
+		}
+	})();
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Start" id="btnStart">
+	<div id="divMessage"></div>
+</body>
+</html>
