@@ -27,10 +27,24 @@
 		function displayMessage(msg){
 			$("#divMessage").html(msg).fadeIn(2000).delay(5000).fadeOut('slow');
 		}
-		
+
+		function loadTasksFromServer(){
+			$.ajax({
+				  type : 'get',
+				  url : 'tasks.json',
+				  dataType : 'json',
+				  success : function(data){
+				    $(data).each(function(index,task){
+				         $("<li>").html(task.taskName).attr("data-task-id",task.id).addClass(task.isCompleted ? "completed" : "").appendTo("#ulTaskList");
+				    });
+				  }
+				});
+		}
+
 		$(function(){
 			$("#btnAddTask").on('click',addTask);
 			$("#btnRemoveCompletedTasks").on('click',removeCompletedTasks);
+			$("#btnLoadData").on("click",loadTasksFromServer);
 			$("#ulTaskList").on('click','li',onTaskItemClick);
 		});
 	})();
@@ -42,10 +56,9 @@
 	<input type="text" name="" id="txtTask">
 	<input type="button" value="Add Task" id="btnAddTask">
 	<input type="button" value="Remove Completed Tasks" id="btnRemoveCompletedTasks">
+	<input type="button" value="Load from server" id="btnLoadData">
 	<ol id="ulTaskList">
-		<li>Dummy-1</li>
-		<li>Dummy-2</li>
-		<li>Dummy-3</li>
+		
 	</ol>
 	<div id="divMessage">[A div for displaying messages]</div>
 </body>
