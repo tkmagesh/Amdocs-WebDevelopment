@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="..\..\..\lib\jquery-1.8.3.js"></script>
+	<script>
+	$(function(){
+		var socket = new WebSocket("ws://localhost:9090/ChatServer");
+		socket.onmessage = function(evt){
+			$("#divMessages").append(evt.data + "<br/>");
+		};
+
+		$("#btnSend").click(function(){
+			var msg = $("#txtMessage").val();
+			socket.send(msg);
+		});
+	});
+
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="txtMessage">
+	<input type="button" value="Send" id="btnSend">
+	<div id="divMessages"></div>
+</body>
+</html>

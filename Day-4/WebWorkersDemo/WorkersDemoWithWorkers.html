@@ -6,34 +6,21 @@
 	<script src="..\..\lib\jquery-1.8.3.js"></script>
 	<script>
 	$(function(){
+		var worker = new Worker("WorkerTask.js");
+		worker.onmessage = function(evt){
+			if (evt.data === "completed"){
+				displayMessage("work completed");
+			}
+		}
 		$("#btnStart").click(function(){
-			displayMessage("Work Starting");
-			doWork(function(){
-					displayMessage("Work Completed");	
-				});
-			
+			displayMessage("work started");
+			worker.postMessage("start");
 		});
 	});
 	function displayMessage(msg){
 		$("#divMessage").append("<br/>" + msg);
 	}
-	function doWork(completionCallback){
-		var count = 0;
-		function inner(){
-			count++;
-
-			for(var i=0;i<100;i++)
-			for(var j=0;j<1000;j++)
-				for(var k=0;k<100;k++)
-				{}	
-			console.log(count);
-			if (count < 1000)
-				setTimeout(inner,10);
-			else
-				completionCallback();
-		}
-		inner();
-	}
+	
 
 	</script>
 </head>
