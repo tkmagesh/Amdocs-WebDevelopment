@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="..\..\lib\jquery-1.8.3.js"></script>
+	<script>
+	$(function(){
+		$("#btnStart").click(function(){
+			displayMessage("Work Starting");
+			doWork();
+			displayMessage("Work Completed");
+		});
+	});
+	function displayMessage(msg){
+		$("#divMessage").append("<br/>" + msg);
+	}
+	function doWork(){
+		for(var i=0;i<100000;i++)
+			for(var j=0;j<1000;j++)
+				for(var k=0;k<100;k++)
+				{}
+	}
+
+	</script>
+</head>
+<body>
+	<input type="text" name="" id="">
+	<input type="button" value="Start" id="btnStart">
+	<div id="divMessage"></div>
+</body>
+</html>
