@@ -2,12 +2,6 @@
 	function addTask(){
 		var taskName = document.getElementById("txtTask").value;
 		var taskList = document.getElementById("ulTaskList");
-		
-		/* Bad approach */
-		//var newTaskNode = "<li>" + taskName + "</li>";
-		//taskList.innerHTML = taskList.innerHTML + newTaskNode;
-		/*****************************************************/
-
 		var newTaskNode = document.createElement("li");
 		newTaskNode.innerHTML = taskName;
 		newTaskNode.addEventListener("click",onTaskItemClick);

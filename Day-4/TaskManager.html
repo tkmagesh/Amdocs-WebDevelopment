@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Task Manager</title>
+	<link rel="stylesheet" href="TaskManager.css">
+	<script src="..\lib\jquery-1.8.3.js"></script>
+	<script src="taskStorage.js"></script>
+	<script>
+	var app = app || {};
+	(function(){
+		var storage = app.taskStorage;
+		function addTask(){
+			var taskName = $("#txtTask").val();
+			//Save it to the storage;
+			var newTask = storage.addTask(taskName);
+			addTaskToUi(newTask);
+		}
+
+		function addTaskToUi(newTask){
+			$("<li>")
+				.attr("data-task-id",newTask.id)
+				.html(newTask.taskName)
+				.addClass(newTask.isCompleted ? "completed" : "")
+				.appendTo($("#ulTaskList"));
+			displayMessage("A new task Item is added");
+		}
+		
+		function removeCompletedTasks(){
+			var taskItemCount = $("#ulTaskList > li.completed").length;
+			$("#ulTaskList > li.completed").each(function(index,taskItem){
+				removeTaskFromStorage($(this).attr("data-task-id"));
+				$(this).remove();
+			});
+			displayMessage(taskItemCount + " tasks are removed");
+		}
+
+		
+
+		function onTaskItemClick(){
+			$(this).toggleClass("completed");
+			storage.toggleCompletion($(this).attr("data-task-id"));
+		}
+
+		
+
+		function displayMessage(msg){
+			$("#divMessage").html(msg).fadeIn(2000).delay(5000).fadeOut('slow');
+		}
+
+		
+
+		function addAllTasksFromStorage(){
+			var tasks = storage.getAllTasks();
+			for(var i=0;i<tasks.length;i++){
+				addTaskToUi(tasks[i]);
+			}
+		}
+
+		function loadTasksFromServer(){
+			var newTask = {taskName : 'Try Ajax'};
+			$.ajax({
+				  type : 'get',
+				  url : 'tasks.json',
+				  dataType : 'json',
+				  success : function(responseData){
+				  	for(var i=0;i<responseData.length;i++){
+				  		var task = responseData[i];
+				  		addTaskToUi(task);
+				  	}
+				  }
+				});
+		}
+
+		$(function(){
+			
+			$("#btnAddTask").on('click',addTask);
+			$("#btnRemoveCompletedTasks").on('click',removeCompletedTasks);
+			//$("#btnLoadData").on("click",addAllTasksFromStorage);
+			addAllTasksFromStorage();
+			$("#ulTaskList").on('click','li',onTaskItemClick);
+			
+			var hintText = 'Enter the task';
+			$("#txtTask")
+				.val(hintText)
+				.addClass("hint")
+				.focus(function(){
+					var $this = $(this);
+					if ($this.val() === hintText){
+						$this.removeClass('hint').val('');
+					}
+				})
+				.blur(function(){
+					var $this = $(this);
+					if ($this.val() === ''){
+						$this.addClass('hint').val(hintText);
+					}	
+				});
+		});
+	})();
+	</script>
+
+</head>
+<body>
+	<h1>Task Manager</h1>
+	<span>Task :</span>
+	<input type="text" name="" id="txtTask">
+	<input type="button" value="Add Task" id="btnAddTask">
+	<input type="button" value="Remove Completed Tasks" id="btnRemoveCompletedTasks">
+	<input type="button" value="Load from server" id="btnLoadData">
+	<ol id="ulTaskList">
+		
+	</ol>
+	<div id="divMessage">[A div for displaying messages]</div>
+</body>
+</html>
