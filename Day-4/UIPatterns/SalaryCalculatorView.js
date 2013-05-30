@@ -23,8 +23,20 @@ function SalaryCalculatorView(model){
 			_model.calculate();
 		});
 
+		_model.addOnModelChanged(onModelChanged.bind(this));
 
-		_model.addOnModelChanged((function(that){
+		function onModelChanged(attribute){
+				if (attribute === "basic") this.$root.find("#txtBasic").val(_model.basic());
+				if (attribute === "hra") this.$root.find("#txtHra").val(_model.hra());
+				if (attribute === "da") this.$root.find("#txtDa").val(_model.da());
+				if (attribute === "tax") {
+					this.$root.find("#rangeTax").val(_model.tax());
+					this.$root.find("#spanTax").html(_model.tax());
+				}
+				if (attribute === "gross") this.$root.find("#divResult").html(_model.gross());
+			};
+
+		/*_model.addOnModelChanged((function(that){
 			var context = that;
 			return function(attribute){
 				if (attribute === "basic") context.$root.find("#txtBasic").val(_model.basic());
@@ -36,6 +48,6 @@ function SalaryCalculatorView(model){
 				}
 				if (attribute === "gross") context.$root.find("#divResult").html(_model.gross());
 			};
-		})(this));
+		})(this));*/
 	}	
 }

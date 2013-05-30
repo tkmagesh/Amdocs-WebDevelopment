@@ -1,0 +1,11 @@
+	h1{
+		margin:10px 0px;
+		border-top: 3px solid red;
+		border-bottom: 3px solid red;
+		background-color: lightpink;
+		padding: 10px 0px;
+	}
+
+	#btnRemoveCompletedTasks{
+		display :none;
+	}
